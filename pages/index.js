@@ -11,7 +11,7 @@ export default function Home({ products }) {
       <Head><title>Amazon</title></Head>
       <Header />
 
-      <main className='max-w-screen-2xl mx-auto'>
+      <main className='max-w-screen-2xl mx-auto bg-gray-200'>
         {/* Banner */}
         <Banner />
 
@@ -23,7 +23,7 @@ export default function Home({ products }) {
   )
 }
 
-export async function getServiceProps(context){
+export async function getServerSideProps(context){
   const products = await fetch("https://fakestoreapi.com/products").then(
     (res) => res.json()
   );
