@@ -5,8 +5,14 @@ import {
   SearchIcon,
   ShoppingCartIcon,
 } from '@heroicons/react/outline'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 function Header() {
+
+  const { data: session } = useSession()
+  const router = useRouter()
+
   return (
     
     <header>
@@ -15,7 +21,7 @@ function Header() {
 
         {/* logo */}
           <div className='mt-2 flex flex-grow items-center sm:flex-grow-0'>
-              <Image src="https://links.papareact.com/f90" width={150} height={40} objectFit="contain" className='cursor-pointer'/>
+              <Image onClick={() => router.push('/')} src="https://links.papareact.com/f90" width={150} height={40} objectFit="contain" className='cursor-pointer'/>
           </div>
 
           {/* search */}
@@ -26,8 +32,10 @@ function Header() {
 
           {/* left */}
           <div className='text-white flex text-xs items-center space-x-6 mx-6 whitespace-nowrap'>
-            <div className='link'>
-              <p>Hello Abdulla Nalim</p>
+            <div onClick={!session ? signIn : signOut} className='link'>
+              <p className='hover:underline'>
+                {session ? `Hello, ${session.user.name}` : 'Sign In'}
+              </p>
               <p className='font-semibold md:font-bold'>Account & Lists</p>
             </div>
 
@@ -36,7 +44,7 @@ function Header() {
               <p className='font-bold'>& Orders</p>
             </div>
 
-            <div className='link relative flex items-center'>
+            <div className='link relative flex items-center' onClick={() => router.push('/checkout')}>
               <span className='absolute right-0 top-0 md:right-10 bg-yellow-400 rounded-full font-bold text-black h-4 w-4 text-center'>0</span>
               <ShoppingCartIcon className='h-10'/>
               <p className='hidden font-bold md:inline'>Basket</p>
