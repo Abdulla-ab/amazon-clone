@@ -9,7 +9,7 @@ import { addToBasket } from '../slices/basketSlice'
 const MAX_RATING = 5;
 const MIN_RATING = 1;
 
-function Product({ id, title, price, description, category, image }) {
+function Product({ key, id, title, price, description, category, image }) {
 
   const dispatch = useDispatch();
 
@@ -19,6 +19,7 @@ function Product({ id, title, price, description, category, image }) {
 
   const addItemToBasket = () => {
     const product = {
+      key,
       id,
       title,
       price,
@@ -48,8 +49,6 @@ function Product({ id, title, price, description, category, image }) {
         ))}
 
       </div>
-
-      {hasPrime && <p></p>}
 
       <p className='text-xs my-2 line-clamp-3'>{description}</p>
 

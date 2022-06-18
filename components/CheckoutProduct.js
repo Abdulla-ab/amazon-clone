@@ -7,6 +7,7 @@ import { addToBasket } from '../slices/basketSlice'
 import { removeFromBasket } from '../slices/basketSlice'
 
 function CheckoutProduct({
+    key,
     id,
     title,
     price,
@@ -21,6 +22,7 @@ function CheckoutProduct({
 
     const addItemToBasket = () => {
         const product = {
+            key,
             id,
             title,
             price,
